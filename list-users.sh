@@ -1,4 +1,15 @@
 #!/bin/bash
+#
+#
+###############
+#
+#About: Changing view type from Pull to Admin and Addig Helper to the script
+#Name: Prathvees
+#Date: 5/08/2024
+#Time: 11:44 PM
+###############
+
+helper()
 
 # GitHub API URL
 API_URL="https://api.github.com"
@@ -25,7 +36,7 @@ function list_users_with_read_access {
     local endpoint="repos/${REPO_OWNER}/${REPO_NAME}/collaborators"
 
     # Fetch the list of collaborators on the repository
-    collaborators="$(github_api_get "$endpoint" | jq -r '.[] | select(.permissions.pull == true) | .login')"
+    collaborators="$(github_api_get "$endpoint" | jq -r '.[] | select(.permissions.admin == true) | .login')"
 
     # Display the list of collaborators with read access
     if [[ -z "$collaborators" ]]; then
@@ -34,6 +45,15 @@ function list_users_with_read_access {
         echo "Users with read access to ${REPO_OWNER}/${REPO_NAME}:"
         echo "$collaborators"
     fi
+}
+
+#Adding Helper Functions to the script
+
+function helper{
+expected_cmd_args=2
+if[ $# -ne $expected_cmd_args]; then
+echo "please execute script with required cmd args some cmd are missing"
+echo "asd"
 }
 
 # Main script
